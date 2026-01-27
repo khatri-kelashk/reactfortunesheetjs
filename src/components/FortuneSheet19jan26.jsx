@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback } from 'react';
 import { Workbook } from '@fortune-sheet/react';
 import '@fortune-sheet/react/dist/index.css';
 import axios from 'axios';
@@ -33,19 +33,45 @@ const FortuneSheetCustom = () => {
         { r: 0, c: 3, v: { v: 'Description', bl: 1, bg: '#f0f0f0' } },
         { r: 1, c: 0, v: { v: 'John Doe' } },
         { r: 1, c: 1, v: { v: 30 } },
-        { r: 1, c: 2, v: { v: 'New York' } },
-        { r: 1, c: 3, v: { v: 'Software Engineer at Tech Corp' } },
-        { r: 2, c: 0, v: { v: 'Jane Smith' } },
-        { r: 2, c: 1, v: { v: 25 } },
-        { r: 2, c: 2, v: { v: 'London' } },
-        { r: 2, c: 3, v: { v: 'Product Designer' } },
-        { r: 3, c: 0, v: { v: 'Bob Johnson' } },
-        { r: 3, c: 1, v: { v: 35 } },
-        { r: 3, c: 2, v: { v: 'Paris' } },
-        { r: 3, c: 3, v: { v: 'Marketing Manager' } },
+        // { r: 1, c: 2, v: { v: 'New York' } },
+        // { r: 1, c: 3, v: { v: 'Software Engineer at Tech Corp' } },
+        // { r: 2, c: 0, v: { v: 'Jane Smith' } },
+        // { r: 2, c: 1, v: { v: 25 } },
+        // { r: 2, c: 2, v: { v: 'London' } },
+        // { r: 2, c: 3, v: { v: 'Product Designer' } },
+        // { r: 3, c: 0, v: { v: 'Bob Johnson' } },
+        // { r: 3, c: 1, v: { v: 35 } },
+        // { r: 3, c: 2, v: { v: 'Paris' } },
+        // { r: 3, c: 3, v: { v: 'Marketing Manager' } },
       ],
     },
   ]);
+  // Update selected cell information
+  const updateSelectedInfo = useCallback(() => {
+    const selection = workbookRef.current?.getSelection();
+    if (selection && selection.length > 0) {
+      const { row, column } = selection[0];
+      const cellValue = workbookRef.current?.getCellValue(row[0], column[0]);
+      
+      // Get column width and row height
+      const colWidths = workbookRef.current?.getColumnWidth([column[0]]);
+      const rowHeights = workbookRef.current?.getRowHeight([row[0]]);
+      
+      setSelectedInfo({
+        row: row[0],
+        col: column[0],
+        value: cellValue?.v || '',
+        bold: cellValue?.bl === 1,
+        italic: cellValue?.it === 1,
+        underline: cellValue?.un === 1,
+        bg: cellValue?.bg,
+        fc: cellValue?.fc,
+        fs: cellValue?.fs,
+        colWidth: colWidths?.[column[0]] || 73,
+        rowHeight: rowHeights?.[row[0]] || 19,
+      });
+    }
+  }, []);
 
   // Get current selection
   const getSelection = () => {
@@ -111,7 +137,7 @@ const FortuneSheetCustom = () => {
   };
 
   // Resize column width
-  const resizeColumn = () => {
+  const resizeColumn = useCallback(() => {
     const selection = getSelection();
     if (!selection) return;
 
@@ -128,10 +154,10 @@ const FortuneSheetCustom = () => {
       updateSelectedInfo();
       alert(`Column ${String.fromCharCode(65 + colIndex)} resized to ${newWidth}px`);
     }
-  };
+  }, [updateSelectedInfo]);
 
   // Resize row height
-  const resizeRow = () => {
+  const resizeRow = useCallback(() => {
     const selection = getSelection();
     if (!selection) return;
 
@@ -148,10 +174,10 @@ const FortuneSheetCustom = () => {
       updateSelectedInfo();
       alert(`Row ${rowIndex + 1} resized to ${newHeight}px`);
     }
-  };
+  }, [updateSelectedInfo]);
 
   // Auto resize column to fit content
-  const autoResizeColumn = () => {
+  const autoResizeColumn = useCallback(() => {
     const selection = getSelection();
     if (!selection) return;
 
@@ -163,10 +189,10 @@ const FortuneSheetCustom = () => {
     alert(`Auto-resize for column ${String.fromCharCode(65 + colIndex)} will be based on content. Setting to 150px as example.`);
     workbookRef.current?.setColumnWidth({ [colIndex]: 150 });
     updateSelectedInfo();
-  };
+  }, [updateSelectedInfo]);
 
   // Make text bold
-  const makeBold = () => {
+  const makeBold = useCallback(() => {
     const selection = getSelection();
     if (!selection) return;
 
@@ -176,10 +202,10 @@ const FortuneSheetCustom = () => {
 
     workbookRef.current?.setCellFormat(row[0], column[0], 'bl', isBold ? 0 : 1);
     updateSelectedInfo();
-  };
+  }, [updateSelectedInfo]);
 
   // Make text italic
-  const makeItalic = () => {
+  const makeItalic = useCallback(() => {
     const selection = getSelection();
     if (!selection) return;
 
@@ -189,10 +215,10 @@ const FortuneSheetCustom = () => {
 
     workbookRef.current?.setCellFormat(row[0], column[0], 'it', isItalic ? 0 : 1);
     updateSelectedInfo();
-  };
+  }, [updateSelectedInfo]);
 
   // Make text underline
-  const makeUnderline = () => {
+  const makeUnderline = useCallback(() => {
     const selection = getSelection();
     if (!selection) return;
 
@@ -202,40 +228,40 @@ const FortuneSheetCustom = () => {
 
     workbookRef.current?.setCellFormat(row[0], column[0], 'un', isUnderline ? 0 : 1);
     updateSelectedInfo();
-  };
+  }, [updateSelectedInfo]);
 
   // Change background color
-  const changeBackgroundColor = (color) => {
+  const changeBackgroundColor = useCallback((color) => {
     const selection = getSelection();
     if (!selection) return;
 
     const { row, column } = selection;
     workbookRef.current?.setCellFormat(row[0], column[0], 'bg', color);
     updateSelectedInfo();
-  };
+  }, [updateSelectedInfo]);
 
   // Change text color
-  const changeTextColor = (color) => {
+  const changeTextColor = useCallback((color) => {
     const selection = getSelection();
     if (!selection) return;
 
     const { row, column } = selection;
     workbookRef.current?.setCellFormat(row[0], column[0], 'fc', color);
     updateSelectedInfo();
-  };
+  }, [updateSelectedInfo]);
 
   // Change font size
-  const changeFontSize = (size) => {
+  const changeFontSize = useCallback((size) => {
     const selection = getSelection();
     if (!selection) return;
 
     const { row, column } = selection;
     workbookRef.current?.setCellFormat(row[0], column[0], 'fs', size);
     updateSelectedInfo();
-  };
+  }, [updateSelectedInfo]);
 
   // Update cell value
-  const updateCellValue = () => {
+  const updateCellValue = useCallback(() => {
     const selection = getSelection();
     if (!selection) return;
 
@@ -247,10 +273,10 @@ const FortuneSheetCustom = () => {
       workbookRef.current?.setCellValue(row[0], column[0], newValue);
       updateSelectedInfo();
     }
-  };
+  }, [updateSelectedInfo]);
 
   // Clear cell formatting
-  const clearFormatting = () => {
+  const clearFormatting = useCallback(() => {
     const selection = getSelection();
     if (!selection) return;
 
@@ -264,39 +290,13 @@ const FortuneSheetCustom = () => {
     workbookRef.current?.setCellFormat(row[0], column[0], 'fs', 10);
     
     updateSelectedInfo();
-  };
+  }, [updateSelectedInfo]);
 
-  // Update selected cell information
-  const updateSelectedInfo = () => {
-    const selection = workbookRef.current?.getSelection();
-    if (selection && selection.length > 0) {
-      const { row, column } = selection[0];
-      const cellValue = workbookRef.current?.getCellValue(row[0], column[0]);
-      
-      // Get column width and row height
-      const colWidths = workbookRef.current?.getColumnWidth([column[0]]);
-      const rowHeights = workbookRef.current?.getRowHeight([row[0]]);
-      
-      setSelectedInfo({
-        row: row[0],
-        col: column[0],
-        value: cellValue?.v || '',
-        bold: cellValue?.bl === 1,
-        italic: cellValue?.it === 1,
-        underline: cellValue?.un === 1,
-        bg: cellValue?.bg,
-        fc: cellValue?.fc,
-        fs: cellValue?.fs,
-        colWidth: colWidths?.[column[0]] || 73,
-        rowHeight: rowHeights?.[row[0]] || 19,
-      });
-    }
-  };
 
-  // Handle data changes
-  const handleChange = () => {
+  // Handle data changes - only update on user interaction, not on re-renders
+  const handleChange = useCallback(() => {
     updateSelectedInfo();
-  };
+  }, [updateSelectedInfo]);
 
   return (
     <div style={styles.container}>

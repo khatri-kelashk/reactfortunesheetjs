@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Workbook } from '@fortune-sheet/react';
 import '@fortune-sheet/react/dist/index.css';
 import axios from 'axios';
@@ -48,6 +48,12 @@ const FortuneSheetCustom = () => {
       ],
     },
   ]);
+
+  // useEffect(() => {
+  //   // Initial update of selected cell info
+  //   console.log("selectedInfo", selectedInfo);
+  //   ;
+  // }, [selectedInfo]);
 
   // Get current selection
   const getSelection = () => {
