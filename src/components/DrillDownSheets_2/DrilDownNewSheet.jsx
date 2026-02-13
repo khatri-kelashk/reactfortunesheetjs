@@ -1,9 +1,12 @@
 // DrilDownNewSheet.jsx
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { Workbook } from "@fortune-sheet/react";
 import "@fortune-sheet/react/dist/index.css";
 
 const DrilDownNewSheet = () => {
+      const navigate = useNavigate();
+
   const workbookRef = useRef(null);
   const containerRef = useRef(null);
   const [sheetVersion, setSheetVersion] = useState(0);
@@ -119,7 +122,12 @@ const DrilDownNewSheet = () => {
     }
   };
 
+  const handleNavigateClick = () => {
+    navigate("/text-editor"); // navigate to next page
+  };
+
   return (
+    <>
     <div style={{ height: "500px", padding: "20px" }}>
       <h3>Fortune Sheet Test - Click on cell B2 (100) to drill down</h3>
       <div
@@ -140,6 +148,8 @@ const DrilDownNewSheet = () => {
         />
       </div>
     </div>
+    <button onClick={() => {handleNavigateClick()}} style={{border: "1px solid gray", marginLeft: 20}}>Open Terms & Conditions</button>
+    </>
   );
 };
 
