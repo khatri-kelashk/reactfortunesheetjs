@@ -26,6 +26,7 @@ import TextEditor from "./pages/TextEditor";
 // import ANTDCalendarV2 from "./components/ANTDCalendar_V2/Scheduler/index";
 // import ANTDCalendarV3Scheduler from "./components/ANTDCalendar_V3/index"
 import ANTDCalendarV4Scheduler from "./components/ANTDCalendar_V4/index";
+import ANTDCalendarV5Scheduler from "./components/ANTDCalendar_V5/index";
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         {/* <Route path="/antd-calendar-v2" element={<ANTDCalendarV2 />} /> */}
         {/* <Route path="/antd-calendar-v3" element={<ANTDCalendarV3Scheduler />} /> */}
         <Route path="/antd-calendar-v4" element={<ANTDCalendarV4Scheduler />} />
+        <Route path="/antd-calendar-v5" element={<ANTDCalendarV5Scheduler />} />
       </Routes>
     </>
   );

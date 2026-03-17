@@ -1,0 +1,489 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   ANTD Calendar V5 - Styles
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ─── ROOT & LAYOUT ────────────────────────────────────────────────────────────*/
+.calendar-root {
+  display: flex;
+  height: 100vh;
+  font-family: 'DM Sans', 'Segoe UI', sans-serif;
+  background: #f5f6fa;
+  overflow: hidden;
+}
+
+.calendar-left-panel {
+  width: 200px;
+  min-width: 200px;
+  background: #fff;
+  border-right: 1px solid #e8e8e8;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 30;
+}
+
+.calendar-right-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+/* ─── LEFT PANEL SECTIONS ──────────────────────────────────────────────────────*/
+.mini-cal-container {
+  padding: 12px 10px 8px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mini-cal-second {
+  margin-top: 12px;
+}
+
+.people-header {
+  padding: 8px 14px 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.people-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #bbb;
+  letter-spacing: 1px;
+}
+
+.people-icon {
+  color: #bbb;
+  font-size: 12px;
+}
+
+.header-spacer {
+  flex-shrink: 0;
+}
+
+.user-list-container {
+  flex: 1;
+  overflow-y: hidden;
+}
+
+.left-user-row {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-bottom: 1px solid #f5f5f5;
+  box-sizing: border-box;
+}
+
+.user-name-text {
+  font-size: 12px;
+  color: #333;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ─── TOOLBAR ──────────────────────────────────────────────────────────────────*/
+.calendar-toolbar {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8;
+  gap: 12px;
+  flex-shrink: 0;
+  height: 56px;
+  box-sizing: border-box;
+}
+
+.toolbar-buttons-group {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.toolbar-button {
+  border-radius: 6px;
+}
+
+.toolbar-button-today {
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.toolbar-title {
+  flex: 1;
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  color: #1a1a2e;
+}
+
+.toolbar-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 4px 12px;
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.toolbar-dropdown-icon {
+  color: #888;
+}
+
+.toolbar-dropdown-text {
+  font-size: 13px;
+  color: #444;
+  font-weight: 500;
+}
+
+.toolbar-dropdown-arrow {
+  font-size: 9px;
+  color: #aaa;
+}
+
+/* ─── SCROLL CONTAINER ────────────────────────────────────────────────────────*/
+.calendar-scroll-container {
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: auto;
+  position: relative;
+}
+
+.grid-canvas {
+  position: relative;
+}
+
+/* ─── STICKY ROWS (Headers) ───────────────────────────────────────────────────*/
+.sticky-row {
+  position: sticky;
+  display: flex;
+  background: #fff;
+}
+
+.sticky-row-day-header {
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.sticky-row-hour-ticks {
+  z-index: 19;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+/* ─── DAY HEADER CELL ──────────────────────────────────────────────────────────*/
+.day-header-cell {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 6px;
+  box-sizing: border-box;
+  border-right: 1px solid #ececec;
+}
+
+.day-header-weekend {
+  background: #fafafa;
+}
+
+.day-header-weekday {
+  background: #fff;
+}
+
+.day-label-sticky {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-left: 10px;
+  padding-bottom: 4px;
+}
+
+.day-name-text {
+  font-size: 10px;
+  font-weight: 700;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.day-num-text {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1a1a2e;
+  line-height: 1.1;
+}
+
+.day-num-today {
+  color: #1677ff;
+}
+
+/* ─── HOUR TICK CELL ───────────────────────────────────────────────────────────*/
+.hour-tick-day-cell {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-right: 1px solid #ececec;
+}
+
+.hour-tick-cell {
+  display: inline-flex;
+  align-items: center;
+  border-right: 1px solid #f0f0f0;
+  padding-left: 3px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.hour-tick-text {
+  font-size: 8.5px;
+  color: #ccc;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.2px;
+}
+
+.day-label-spacer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-right: 1px solid #ececec;
+  background: inherit;
+  z-index: 2;
+}
+
+/* ─── GRID BODY ────────────────────────────────────────────────────────────────*/
+.grid-body {
+  position: relative;
+}
+
+.user-row {
+  display: flex;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.day-cell {
+  position: relative;
+  flex-shrink: 0;
+  background: #fff;
+  border-right: 1px solid #ececec;
+  overflow: hidden;
+}
+
+.day-cell-weekend {
+  background: #fafafa;
+}
+
+.day-cell-weekday {
+  background: #fff;
+}
+
+.hour-grid-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #f3f3f3;
+  z-index: 1;
+}
+
+.now-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #e63946;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.multi-day-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.multi-day-event-wrapper {
+  pointer-events: auto;
+}
+
+/* ─── EVENT CHIP ───────────────────────────────────────────────────────────────*/
+.event-chip {
+  position: absolute;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  gap: 5px;
+  cursor: pointer;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: filter 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+}
+
+.event-chip-single {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  z-index: 3;
+}
+
+.event-chip-multi {
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.22);
+  z-index: 6;
+  border-right: 2px dashed rgba(255, 255, 255, 0.4);
+  border-left: 3px solid rgba(255, 255, 255, 0.5);
+}
+
+.event-chip:hover {
+  filter: brightness(1.1);
+}
+
+.event-chip-stripe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 8px 0 0 8px;
+}
+
+.event-chip-avatar {
+  font-size: 9px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.event-chip-avatar-multi {
+  margin-left: 4px;
+}
+
+.event-chip-title {
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.event-chip-date-range {
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 4px;
+  padding: 1px 5px;
+  flex-shrink: 0;
+}
+
+.event-chip-count {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.event-chip-link {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+.event-chip-label {
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.event-chip-badges {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.event-chip-badge {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+/* ─── MINI CALENDAR ────────────────────────────────────────────────────────────*/
+.mini-cal {
+  width: 100%;
+}
+
+.mini-cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.mini-nav {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  color: #888;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.mini-month-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: #333;
+}
+
+.mini-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.mini-head {
+  font-size: 8.5px;
+  font-weight: 700;
+  color: #bbb;
+  text-align: center;
+  padding: 1px 0;
+  text-transform: uppercase;
+}
+
+.mini-day {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 9.5px;
+  color: #444;
+  text-align: center;
+  padding: 2px 0;
+  border-radius: 4px;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.mini-day-today {
+  background: #1677ff;
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* ─── UTILITY CLASSES ──────────────────────────────────────────────────────────*/
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
